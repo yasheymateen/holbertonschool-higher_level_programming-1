@@ -15,6 +15,7 @@ def get_value(c):
         elif c == 'M':
             return 1000
 
+
 def roman_to_int(roman_string):
     if roman_string is None:
         return 0
@@ -28,7 +29,7 @@ def roman_to_int(roman_string):
     for c in roman_string:
         if c is 'M' and sum is 0:
             final_sum += 1000
-            continue;
+            continue
         if first_time:
             sum += get_value(c)
             first_time = False
