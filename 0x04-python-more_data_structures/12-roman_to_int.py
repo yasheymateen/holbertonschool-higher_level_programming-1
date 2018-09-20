@@ -1,11 +1,5 @@
 #!/usr/bin/python3
-def roman_to_int(roman_string):
-    if roman_string is None:
-        return 0
-    if type(roman_string) is not str:
-        return 0
-
-    def get_value(c):
+def get_value(c):
         if c == 'I':
             return 1
         elif c == 'V':
@@ -21,11 +15,20 @@ def roman_to_int(roman_string):
         elif c == 'M':
             return 1000
 
+def roman_to_int(roman_string):
+    if roman_string is None:
+        return 0
+    if type(roman_string) is not str:
+        return 0
+
     final_sum = 0
     sum = 0
     first_time = True
     i = 0
     for c in roman_string:
+        if c is 'M' and sum is 0:
+            final_sum += 1000
+            continue;
         if first_time:
             sum += get_value(c)
             first_time = False
