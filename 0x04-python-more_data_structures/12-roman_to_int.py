@@ -16,8 +16,10 @@ def roman_to_int(roman_string):
         elif c == 'M':
             return 1000
 
+    final_sum = 0
     sum = 0
     first_time = True
+    i = 0
     for c in roman_string:
         if first_time:
             sum += get_value(c)
@@ -26,6 +28,12 @@ def roman_to_int(roman_string):
             current_num = get_value(c)
             if current_num > sum:
                 sum = current_num - sum
+                final_sum += sum
+                sum = 0
+                first_time = True
             else:
                 sum += current_num
-    return sum
+        i += 1
+        if i == len(roman_string):
+            final_sum += sum
+    return final_sum
