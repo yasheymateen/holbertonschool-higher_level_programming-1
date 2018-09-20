@@ -22,27 +22,13 @@ def roman_to_int(roman_string):
     if type(roman_string) is not str:
         return 0
 
-    final_sum = 0
     sum = 0
-    first_time = True
-    i = 0
-    for c in roman_string:
-        if c is 'M' and sum is 0:
-            final_sum += 1000
-            continue
-        if first_time:
-            sum += get_value(c)
-            first_time = False
+    for i in range(len(roman_string)):
+        if i is (len(roman_string) - 1):
+            sum += get_value(roman_string[i])
         else:
-            current_num = get_value(c)
-            if current_num > sum:
-                sum = current_num - sum
-                final_sum += sum
-                sum = 0
-                first_time = True
+            if get_value(roman_string[i]) >= get_value(roman_string[i+1]):
+                    sum += get_value(roman_string[i])
             else:
-                sum += current_num
-        i += 1
-        if i == len(roman_string):
-            final_sum += sum
-    return final_sum
+                    sum -= get_value(roman_string[i])
+    return sum
