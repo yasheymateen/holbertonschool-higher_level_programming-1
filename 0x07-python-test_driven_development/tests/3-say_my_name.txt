@@ -12,10 +12,16 @@ My name is Lil Uzi Vert
 My name is Beyonce 
 
 >>> say_my_name(12, "White")
-first_name must be a string
+Traceback (most recent call last):
+  ...
+TypeError: first_name must be a string
 
 >>> say_my_name("Jinji", 3000)
-last_name must be a string
+Traceback (most recent call last):
+  ...
+TypeError: last_name must be a string
 
 >>> say_my_name(["hello", 2], 13)
-first_name must be a string
+Traceback (most recent call last):
+  ...
+TypeError: first_name must be a string
