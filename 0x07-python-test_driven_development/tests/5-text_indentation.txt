@@ -1,0 +1,35 @@
+``text_indentation`` module
+===========================
+
+Using ``text_indentation``
+--------------------------
+
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+>>> text_indentation("I love you. Give me a hug now?")
+I love you.
+<BLANKLINE>
+Give me a hug now?
+<BLANKLINE>
+
+>>> text_indentation("""Write a function that prints? a text with 2 new lines after each of these characters""")
+Write a function that prints?
+<BLANKLINE>
+a text with 2 new lines after each of these characters
+
+>>> text_indentation("")
+
+>>> text_indentation(45748)
+Traceback (most recent call last):
+  ...
+TypeError: text must be a string
+
+>>> text_indentation({'a': 1, 'b': 2})
+Traceback (most recent call last):
+  ...
+TypeError: text must be a string
+
+>>> text_indentation([1, 2, 3])
+Traceback (most recent call last):
+  ...
+TypeError: text must be a string
