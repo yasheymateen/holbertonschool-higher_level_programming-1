@@ -1,0 +1,21 @@
+``say_my_name`` module
+======================
+
+Using ``matrix_divided``
+
+>>> say_my_name = __import__('3-say_my_name').say_my_name
+
+>>> say_my_name("Lil Uzi", "Vert")
+My name is Lil Uzi Vert
+
+>>> say_my_name("Beyonce")
+My name is Beyonce 
+
+>>> say_my_name(12, "White")
+first_name must be a string
+
+>>> say_my_name("Jinji", 3000)
+last_name must be a string
+
+>>> say_my_name(["hello", 2], 13)
+first_name must be a string
