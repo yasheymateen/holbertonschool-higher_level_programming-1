@@ -1,0 +1,42 @@
+``add_integer`` function
+========================
+
+Using ``add_integer``
+---------------------
+
+>>> add_integer = __import__('0-add_integer').add_integer
+
+>>> add_integer(2)
+100
+
+>>> add_integer(-2)
+96
+
+>>> add_integer(-2.4)
+96
+
+>>> add_integer(2, 3)
+5
+
+>>> add_integer(100.3, -50.0)
+50
+
+>>> add_integer()
+Traceback (most recent call last):
+  ...
+TypeError: add_integer() missing 1 required positional argument: 'a'
+
+>>> add_integer(4, "School")
+Traceback (most recent call last):
+  ...
+TypeError: b must be an integer
+
+>>> add_integer("Holberton")
+Traceback (most recent call last):
+  ...
+TypeError: a must be an integer
+
+>>> add_integer([1, 2, 3], 8)
+Traceback (most recent call last):
+  ...
+TypeError: a must be an integer
