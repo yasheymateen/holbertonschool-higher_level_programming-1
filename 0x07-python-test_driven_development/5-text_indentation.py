@@ -10,11 +10,11 @@ def text_indentation(text):
     line = ""
     skip = False
     for c in text:
-        if c != '.' and c != '?' and c != ':':
-            line += c
         if skip:
             skip = False
             continue
+        if c != '.' and c != '?' and c != ':':
+            line += c
         else:
             line += c
             print(line)
