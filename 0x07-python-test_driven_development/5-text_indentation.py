@@ -8,17 +8,18 @@ def text_indentation(text):
     if type(text) is not str:
         raise TypeError("text must be a string")
     line = ""
-    skip = False
-    for c in text:
-        if skip:
-            skip = False
-            continue
-        if c != '.' and c != '?' and c != ':':
-            line += c
-        else:
-            line += c
+    i = 0
+
+    while i < len(text):
+        if text[i] == '.' or text[i] == '?' or text[i] == ':':
+            line += text[i]
             print(line)
             print()
             line = ""
-            skip = True
+            if i+1 < len(text) and text[i+1] != '.' and \
+               text[i+1] != '?' and text[i+1] != ':':
+                i += 1
+        else:
+            line += text[i]
+        i += 1
     print(line, end="")
