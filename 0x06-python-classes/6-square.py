@@ -7,18 +7,8 @@ class Square:
 
     def __init__(self, size=0, position=(0, 0)):
         """Initializes the data with error handling."""
-        if not isinstance(size, int):
-            raise TypeError("size must be an integer")
-        if size < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = size
-        if len(position) < 2:
-            raise TypeError("position must be a tuple of 2 positive integers")
-        if not isinstance(position[0], int) or position[0] < 0:
-            raise TypeError("position must be a tuple of 2 positive integers")
-        if not isinstance(position[1], int) or position[1] < 0:
-            raise TypeError("position must be a tuple of 2 positive integers")
-        self.__position = position
+        self.size = size
+        self.position = position
 
     def area(self):
         """Returns the current square area."""
