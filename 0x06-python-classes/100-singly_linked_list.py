@@ -18,6 +18,7 @@ class Node:
         """Returns data of Node
         """
         return self.__data
+
     @property
     def next_node(self):
         """Returns name of next node in a Singly Linked List
@@ -31,6 +32,7 @@ class Node:
         if type(value) is not int:
             raise TypeError("data must be an integer")
         self.__data = value
+
     @next_node.setter
     def next_node(self, value):
         """Sets value to next node of a Node
@@ -38,6 +40,7 @@ class Node:
         if value is not None and type(value) is not Node:
             raise TypeError("next_node must be a node object")
         self.__next_node = value
+
 
 class SinglyLinkedList:
     """Represents a Singly Linked List
@@ -51,6 +54,8 @@ class SinglyLinkedList:
     def __str__(self):
         """Use print to print entire sorted list
         """
+        if self.__head is None:
+            return str("")
         tmp = self.__head
         while tmp.next_node:
             print(tmp.data)
