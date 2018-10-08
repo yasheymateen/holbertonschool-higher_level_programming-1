@@ -16,15 +16,15 @@ class Rectangle:
     def __str__(self):
         """Print the rectangle with the character #
         """
+        retval = ""
         height = self.height
         width = self.width
         if height != 0 and width != 0:
             for i in range(height):
-                for j in range(width):
-                    print('#', end='')
+                retval += "#" * width
                 if i != height - 1:
-                    print()
-        return ""
+                    retval += "\n"
+        return retval
 
     @property
     def width(self):
