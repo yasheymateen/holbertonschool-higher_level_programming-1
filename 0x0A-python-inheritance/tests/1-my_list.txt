@@ -1,0 +1,33 @@
+``print_sorted`` function
+=========================
+
+Using ``print_sorted``
+----------------------
+
+>>> MyList = __import__('1-my_list').MyList
+
+>>> l = MyList()
+>>> l.append(5)
+>>> l.append(1)
+>>> l.append(2)
+>>> l.print_sorted()
+[1, 2, 5]
+
+>>> l.append(-2)
+>>> l.print_sorted()
+[-2, 1, 2, 5]
+
+>>> neg = MyList()
+>>> neg.append(-6)
+>>> neg.append(-8)
+>>> neg.append(-1)
+>>> neg.print_sorted()
+[-8, -6, -1]
+
+>>> wrong = MyList()
+>>> wrong.append('hi')
+>>> wrong.append(8)
+>>> wrong.print_sorted()
+Traceback (most recent call last):
+  ...
+TypeError: unorderable types: int() < str()
