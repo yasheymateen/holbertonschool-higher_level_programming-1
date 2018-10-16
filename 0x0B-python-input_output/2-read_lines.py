@@ -14,6 +14,8 @@ def number_of_lines(filename=""):
 def read_lines(filename="", nb_lines=0):
     """function that reads n lines of a text file and prints it to stdout
     """
+    if type(filename) is not str:
+        raise TypeError("filename must be a string")
     line_num = 0
     lines = number_of_lines(filename)
     with open(filename) as f:
