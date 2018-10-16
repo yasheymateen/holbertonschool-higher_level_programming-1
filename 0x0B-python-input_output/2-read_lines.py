@@ -11,6 +11,7 @@ def number_of_lines(filename=""):
             lines += 1
     return lines
 
+
 def read_lines(filename="", nb_lines=0):
     """function that reads n lines of a text file and prints it to stdout
     """
