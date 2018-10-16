@@ -6,7 +6,7 @@ def number_of_lines(filename=""):
     """function that returns the number of lines of a text file
     """
     lines = 0
-    with open(filename) as f:
+    with open(filename, encoding='utf-8') as f:
         for line in f:
             lines += 1
     return lines
@@ -18,7 +18,7 @@ def read_lines(filename="", nb_lines=0):
         raise TypeError("filename must be a string")
     line_num = 0
     lines = number_of_lines(filename)
-    with open(filename) as f:
+    with open(filename, encoding='utf-8') as f:
         if nb_lines <= 0 or nb_lines >= lines:
             print(f.read(), end='')
         else:
