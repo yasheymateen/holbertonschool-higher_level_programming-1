@@ -16,4 +16,17 @@ class Square(Rectangle):
         """Print representation of a Square instance
         """
         return "[Square] ({:d}) {:d}/{:d} - {:d}".format(
-            self.id, self.x, self.y, super().height)
+            self.id, self.x, self.y, self.height)
+
+    @property
+    def size(self):
+        """Getter for size attribute
+        """
+        return self.height
+
+    @size.setter
+    def size(self, value):
+        """Setter for size attribute
+        """
+        self.width = value
+        self.height = value
