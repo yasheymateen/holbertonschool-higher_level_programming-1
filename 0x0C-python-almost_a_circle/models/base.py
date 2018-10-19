@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Base module"""
 import json
+import os.path
 
 
 class Base:
@@ -64,3 +65,31 @@ class Base:
         if json_string is None or len(json_string) == 0:
             json_string = "[]"
         return json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """class method that returns an instance with all attributes
+        already set.
+
+        Parameters:
+        **dictionary: double pointer to a dictionary
+        """
+        dummy = cls(1, 1)
+        dummy.update(**dictionary)
+        return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """returns a list of instances
+        """
+        filename = cls.__name__ + '.json'
+        obj_list = []
+        if not os.path.exists(filename):
+            return obj_list
+
+        with open(filename, "r", encoding="utf8") as f:
+            json_string = f.read()
+            obj_list2 = Base.from_json_string(json_string)
+            for obj_dict in obj_list2:
+                obj_list.append(cls.create(**obj_dict))
+        return obj_list
