@@ -100,28 +100,45 @@ class Rectangle(Base):
         """Prints a Rectangle instance description
         """
         return "[Rectangle] ({}) {}/{} - {}/{}".format(
-            self.id, self.x, self.y, self.height, self.width)
+            self.id, self.x, self.y, self.width, self.height)
 
-    def update(self, *args):
-        """Updates the class Rectangle with *args
+    def update(self, *args, **kwargs):
+        """Updates the class Rectangle with *args or **kwargs
 
+        For *args:
         1st argument should be the id attribute
         2nd argument should be the width attribute
         3rd argument should be the height attribute
         4th argument should be the x attribute
         5th argument should be the y attribute
+
+        IFF *args does not exist or is empty, then kwargs (a double
+        pointer to a dictionary of key-value pairs) is used to update
+        the Rectangle instance
         """
         i = 0
-        for arg in args:
-            if i == 0:
-                self.id = arg
-            elif i == 1:
-                self.height = arg
-            elif i == 2:
-                self.width = arg
-            elif i == 3:
-                self.x = arg
-            elif i == 4:
-                self.y = arg
-            i += 1
-
+        if args:
+            for arg in args:
+                if i == 0:
+                    self.id = arg
+                elif i == 1:
+                    self.height = arg
+                elif i == 2:
+                    self.width = arg
+                elif i == 3:
+                    self.x = arg
+                elif i == 4:
+                    self.y = arg
+                i += 1
+        else:
+            for key in kwargs:
+                if key == 'id':
+                    self.id = kwargs[key]
+                elif key == 'width':
+                    self.width = kwargs[key]
+                elif key == 'height':
+                    self.height = kwargs[key]
+                elif key == 'x':
+                    self.x = kwargs[key]
+                elif key == 'y':
+                    self.y = kwargs[key]
