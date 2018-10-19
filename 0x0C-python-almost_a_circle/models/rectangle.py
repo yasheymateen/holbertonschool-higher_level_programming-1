@@ -117,7 +117,7 @@ class Rectangle(Base):
         the Rectangle instance
         """
         i = 0
-        if args:
+        if args and len(args) > 0:
             for arg in args:
                 if i == 0:
                     self.id = arg
@@ -142,3 +142,15 @@ class Rectangle(Base):
                     self.x = kwargs[key]
                 elif key == 'y':
                     self.y = kwargs[key]
+
+    def to_dictionary(self):
+        """Public method that returns the dictionary representation
+        of a Rectangle
+        """
+        ret = {}
+        ret['id'] = self.id
+        ret['width'] = self.width
+        ret['height'] = self.height
+        ret['x'] = self.x
+        ret['y'] = self.y
+        return ret
