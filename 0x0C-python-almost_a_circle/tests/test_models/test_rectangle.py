@@ -24,6 +24,10 @@ class TestRectangle(unittest.TestCase):
         """test for inheritance"""
         self.assertIsInstance(self.a, Base)
 
+    def test_not_inheritance(self):
+        """test for not inheritance"""
+        self.assertNotIsInstance(Base, Rectangle)
+
     def test_id(self):
         """test for id"""
         self.assertEqual(self.a.id, 1)
@@ -33,11 +37,25 @@ class TestRectangle(unittest.TestCase):
         """test for width"""
         self.assertEqual(self.a.width, 2)
         self.assertEqual(self.b.width, 4)
+        self.assertRaises(TypeError, self.a.width, "2")
+        self.assertRaises(TypeError, self.a.width, [1, 2])
+        self.assertRaises(TypeError, self.a.width, {"hello": 1})
+        with self.assertRaises(ValueError):
+            self.a.width = 0
+        with self.assertRaises(ValueError):
+            self.a.width = -1
 
     def test_height(self):
         """test for height"""
         self.assertEqual(self.a.height, 3)
         self.assertEqual(self.b.height, 5)
+        self.assertRaises(TypeError, self.a.height, "2")
+        self.assertRaises(TypeError, self.a.height, [1, 2])
+        self.assertRaises(TypeError, self.a.height, {"hello": 1})
+        with self.assertRaises(ValueError):
+            self.a.height = 0
+        with self.assertRaises(ValueError):
+            self.a.height = -1
 
     def test_x(self):
         """test for x"""
@@ -45,11 +63,17 @@ class TestRectangle(unittest.TestCase):
         self.a.x = 2
         self.assertEqual(self.a.x, 2)
         self.assertEqual(self.b.x, 1)
+        self.assertRaises(TypeError, self.a.x, "2")
+        with self.assertRaises(ValueError):
+            self.a.x = -1
 
     def test_y(self):
         """test for y"""
         self.assertEqual(self.a.y, 0)
         self.assertEqual(self.b.y, 1)
+        self.assertRaises(TypeError, self.a.y, "2")
+        with self.assertRaises(ValueError):
+            self.a.y = -1
 
     def test_exceptions(self):
         """test exceptions"""
