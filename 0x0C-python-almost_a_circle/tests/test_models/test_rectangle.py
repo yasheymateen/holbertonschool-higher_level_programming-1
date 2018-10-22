@@ -92,3 +92,43 @@ class TestRectangle(unittest.TestCase):
         print(self.b)
         self.assertEqual(b_expected_output, b_output.getvalue())
         sys.stdout = sys.__stdout__
+
+    def test_update_0(self):
+        """test method update"""
+        self.b.update(89)
+        output = io.StringIO()
+        sys.stdout = output
+        print(self.b)
+        expected = "[Rectangle] (89) 1/1 - 4/5\n"
+        self.assertEqual(expected, output.getvalue())
+
+        self.b.update(89, 2)
+        output = io.StringIO()
+        sys.stdout = output
+        print(self.b)
+        expected = "[Rectangle] (89) 1/1 - 2/5\n"
+        self.assertEqual(expected, output.getvalue())
+
+        self.b.update(89, 2, 3)
+        output = io.StringIO()
+        sys.stdout = output
+        print(self.b)
+        expected = "[Rectangle] (89) 1/1 - 2/3\n"
+        self.assertEqual(expected, output.getvalue())
+
+        self.b.update(89, 2, 3, 4)
+        output = io.StringIO()
+        sys.stdout = output
+        print(self.b)
+        expected = "[Rectangle] (89) 4/1 - 2/3\n"
+        self.assertEqual(expected, output.getvalue())
+
+        self.b.update(89, 2, 3, 4, 5)
+        output = io.StringIO()
+        sys.stdout = output
+        print(self.b)
+        expected = "[Rectangle] (89) 4/5 - 2/3\n"
+        self.assertEqual(expected, output.getvalue())
+
+if '__name__' == '__main__':
+    unittest.main()
