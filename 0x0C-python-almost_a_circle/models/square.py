@@ -66,3 +66,14 @@ class Square(Rectangle):
                     self.x = kwargs[key]
                 elif key == 'y':
                     self.y = kwargs[key]
+
+    def to_dictionary(self):
+        """Public method that returns the dictionary representation
+        of a Square
+        """
+        ret = {}
+        ret['id'] = self.id
+        ret['size'] = self.height
+        ret['x'] = self.x
+        ret['y'] = self.y
+        return ret
