@@ -129,6 +129,8 @@ class Rectangle(Base):
                     self.x = arg
                 elif i == 4:
                     self.y = arg
+                elif i >= 5:
+                    break
                 i += 1
         else:
             for key in kwargs:
