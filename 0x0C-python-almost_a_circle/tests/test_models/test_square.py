@@ -52,6 +52,14 @@ class TestSquare(unittest.TestCase):
         self.c.size = 10
         self.assertEqual(self.c.width, 10)
 
+        self.assertRaises(TypeError, self.c.size, "hi")
+        self.assertRaises(TypeError, self.c.size, [1, 2])
+        self.assertRaises(TypeError, self.c.size, {"hi": 0})
+        with self.assertRaises(ValueError):
+            self.c.size = -1
+        with self.assertRaises(ValueError):
+            self.c.size = 0
+
     def test_x(self):
         """test for x"""
         self.assertEqual(self.a.x, 0)
