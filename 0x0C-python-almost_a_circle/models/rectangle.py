@@ -122,14 +122,14 @@ class Rectangle(Base):
                 if i == 0:
                     self.id = arg
                 elif i == 1:
-                    self.height = arg
-                elif i == 2:
                     self.width = arg
+                elif i == 2:
+                    self.height = arg
                 elif i == 3:
                     self.x = arg
                 elif i == 4:
                     self.y = arg
-                elif i >= 5:
+                else:
                     break
                 i += 1
         else:
