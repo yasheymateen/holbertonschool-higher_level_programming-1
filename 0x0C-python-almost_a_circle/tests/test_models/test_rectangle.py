@@ -2,6 +2,7 @@
 """Unittest module for class Rectangle
 """
 import unittest
+import os
 import io
 import sys
 import json
@@ -209,9 +210,80 @@ class TestRectangle(unittest.TestCase):
 
     def test_to_json_string(self):
         """test public method to_json_string"""
-        pass
+        dictionary = self.a.to_dictionary()
+        json_string = Base.to_json_string([dictionary])
+        self.assertEqual(Base.to_json_string([dictionary]),
+                         json.dumps([dictionary]))
 
+    def test_save_to_file(self):
+        Rectangle.save_to_file([self.a, self.b])
+        with open("Rectangle.json", "r", encoding="utf8") as f:
+            json_objs = f.read()
+        list_of_dicts = json.loads(json_objs)
+        self.assertDictEqual(list_of_dicts[0], self.a.to_dictionary())
+        self.assertDictEqual(list_of_dicts[1], self.b.to_dictionary())
 
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r", encoding="utf8") as f:
+            json_objs = f.read()
+        empty_list = json.loads(json_objs)
+        self.assertEqual(empty_list, [])
+
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r", encoding="utf8") as f:
+            json_objs = f.read()
+        empty_list = json.loads(json_objs)
+        self.assertEqual(empty_list, [])
+
+    def test_from_json_string(self):
+        Rectangle.save_to_file([self.a, self.b])
+        with open("Rectangle.json", "r", encoding="utf8") as f:
+            json_objs = f.read()
+        list_of_dicts = Rectangle.from_json_string(json_objs)
+        self.assertDictEqual(list_of_dicts[0], self.a.to_dictionary())
+        self.assertDictEqual(list_of_dicts[1], self.b.to_dictionary())
+
+        empty_list = Rectangle.from_json_string(None)
+        self.assertEqual(empty_list, [])
+
+        empty_list = Rectangle.from_json_string("")
+        self.assertEqual(empty_list, [])
+
+    def test_create(self):
+        a_dict = {'id': 98}
+        expected = {'id': 98, 'height': 1, 'width': 1, 'x': 0, 'y': 0}
+        rect = Rectangle.create(**a_dict)
+        self.assertDictEqual(rect.to_dictionary(), expected)
+
+        a_dict = {'id': 98, 'height': 2}
+        expected = {'id': 98, 'height': 2, 'width': 1, 'x': 0, 'y': 0}
+        rect = Rectangle.create(**a_dict)
+        self.assertDictEqual(rect.to_dictionary(), expected)
+
+        a_dict = {'id': 98, 'height': 2, 'width': 3}
+        expected = {'id': 98, 'height': 2, 'width': 3, 'x': 0, 'y': 0}
+        rect = Rectangle.create(**a_dict)
+        self.assertDictEqual(rect.to_dictionary(), expected)
+
+        a_dict = {'id': 98, 'height': 2, 'width': 3, 'x': 1}
+        expected = {'id': 98, 'height': 2, 'width': 3, 'x': 1, 'y': 0}
+        rect = Rectangle.create(**a_dict)
+        self.assertDictEqual(rect.to_dictionary(), expected)
+
+        a_dict = {'id': 98, 'height': 2, 'width': 3, 'x': 1, 'y': 1}
+        expected = {'id': 98, 'height': 2, 'width': 3, 'x': 1, 'y': 1}
+        rect = Rectangle.create(**a_dict)
+        self.assertDictEqual(rect.to_dictionary(), expected)
+
+    def test_load_from_file(self):
+        os.remove("Rectangle.json")
+        empty = Rectangle.load_from_file()
+        self.assertEqual([], empty)
+
+        Rectangle.save_to_file([self.a])
+        list_dict = Rectangle.load_from_file()
+        self.assertDictEqual(list_dict[0].to_dictionary(),
+                             self.a.to_dictionary())
 
 if '__name__' == '__main__':
     unittest.main()
