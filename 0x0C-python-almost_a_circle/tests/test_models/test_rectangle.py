@@ -4,6 +4,7 @@
 import unittest
 import io
 import sys
+import json
 from models.base import Base
 from models.rectangle import Rectangle
 
@@ -192,6 +193,18 @@ class TestRectangle(unittest.TestCase):
         print(r1)
         expected = "[Rectangle] (88) 1/3 - 4/2\n"
         self.assertEqual(expected, output.getvalue())
+
+    def test_to_dictionary(self):
+        """test public method to_dictionary"""
+        to_dict = {'id': 1, 'width': 2, 'height': 3, 'x': 0, 'y': 0}
+        self.assertDictEqual(to_dict, self.a.to_dictionary())
+        to_dict = {'id': 10, 'width': 4, 'height': 5, 'x': 1, 'y': 1}
+        self.assertDictEqual(to_dict, self.b.to_dictionary())
+
+    def test_to_json_string(self):
+        """test public method to_json_string"""
+        pass
+
 
 
 if '__name__' == '__main__':
