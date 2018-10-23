@@ -4,6 +4,7 @@
 import unittest
 import sys
 import io
+import json
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -82,6 +83,14 @@ class TestSquare(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.c.y = -1
 
+    def test_exceptions(self):
+        self.assertRaises(TypeError, Square, "1")
+        self.assertRaises(TypeError, Square, 1, "2")
+        self.assertRaises(TypeError, Square, 1, 2, "3")
+        self.assertRaises(ValueError, Square, -1)
+        self.assertRaises(ValueError, Square, 1, -2)
+        self.assertRaises(ValueError, Square, 1, 2, -3)
+
     def test_str_method(self):
         """test for str method"""
         expected = "[Square] (1) 0/0 - 2\n"
@@ -155,3 +164,57 @@ class TestSquare(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             self.a.update(1, -1)
+
+    def test_to_dictionary(self):
+        a_dict = self.a.to_dictionary()
+        expected = {"size": 2, "x": 0, "y": 0, "id": 1}
+        self.assertDictEqual(a_dict, expected)
+
+    def test_save_to_file(self):
+        Square.save_to_file([self.a, self.b])
+        with open("Square.json", "r", encoding="utf8") as f:
+            json_list = f.read()
+        list_of_dicts = json.loads(json_list)
+        self.assertDictEqual(list_of_dicts[0], self.a.to_dictionary())
+        self.assertDictEqual(list_of_dicts[1], self.b.to_dictionary())
+
+        Square.save_to_file(None)
+        with open("Square.json", "r", encoding="utf8") as f:
+            json_list = f.read()
+        empty_list = json.loads(json_list)
+        self.assertEqual(empty_list, [])
+
+        Square.save_to_file([])
+        with open("Square.json", "r", encoding="utf8") as f:
+            json_list = f.read()
+        empty_list = json.loads(json_list)
+        self.assertEqual(empty_list, [])
+
+    def test_create(self):
+        a_dict = self.a.to_dictionary()
+        square = Square.create(**a_dict)
+        self.assertDictEqual(a_dict, square.to_dictionary())
+
+        a_dict = {'id': 98}
+        expected = {'id': 98, 'size': 1, 'x': 0, 'y': 0}
+        square = Square.create(**a_dict)
+        self.assertDictEqual(expected, square.to_dictionary())
+
+        a_dict = {'id': 98, 'size': 2}
+        expected = {'id': 98, 'size': 2, 'x': 0, 'y': 0}
+        square = Square.create(**a_dict)
+        self.assertDictEqual(expected, square.to_dictionary())
+
+        a_dict = {'id': 98, 'size': 2, 'x': 1}
+        expected = {'id': 98, 'size': 2, 'x': 1, 'y': 0}
+        square = Square.create(**a_dict)
+        self.assertDictEqual(expected, square.to_dictionary())
+
+    def test_load_from_file(self):
+        empty_list = Square.load_from_file()
+        self.assertEqual([], empty_list)
+
+        Square.save_to_file([self.a])
+        list_of_sqs = Square.load_from_file()
+        self.assertDictEqual(list_of_sqs[0].to_dictionary(),
+                             self.a.to_dictionary())
