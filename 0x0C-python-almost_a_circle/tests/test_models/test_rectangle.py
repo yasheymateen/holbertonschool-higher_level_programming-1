@@ -79,6 +79,12 @@ class TestRectangle(unittest.TestCase):
     def test_exceptions(self):
         """test exceptions"""
         self.assertRaises(TypeError, Rectangle, "1", 1)
+        self.assertRaises(TypeError, Rectangle, 1, "2")
+        self.assertRaises(TypeError, Rectangle, 1, 2, 3, "4")
+        self.assertRaises(ValueError, Rectangle, -1, 0)
+        self.assertRaises(ValueError, Rectangle, 0, 1)
+        self.assertRaises(ValueError, Rectangle, 1, -2)
+        self.assertRaises(ValueError, Rectangle, 1, 2, -3)
         self.assertRaises(ValueError, Rectangle, 1, 0)
         self.assertRaises(TypeError, Rectangle, 1, 1, [1])
         self.assertRaises(ValueError, Rectangle, 1, 1, 1, -1)
