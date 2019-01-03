@@ -10,7 +10,8 @@ if __name__ == "__main__":
 
     username, password, db_name, state_name_search = sys.argv[1:]
     cmd = """SELECT * FROM states
-    WHERE name LIKE '{:s}' ORDER BY states.id""".format(state_name_search)
+    WHERE name LIKE BINARY '{:s}'
+    ORDER BY states.id""".format(state_name_search)
     db = MySQLdb.connect(host="localhost",
                          user=username,
                          passwd=password,
