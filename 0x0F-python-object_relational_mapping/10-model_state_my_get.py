@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 """Script that prints the State object with the name passed as argument
-from the database hbtn_0e_6_usa"""
+from the database hbtn_0e_6_usa
+Syntax: ./10-model_state_my_get.py mysql-username mysql-passwd db-name
+state-name-to-search
+"""
 import sys
 from model_state import Base, State
 from sqlalchemy import create_engine
