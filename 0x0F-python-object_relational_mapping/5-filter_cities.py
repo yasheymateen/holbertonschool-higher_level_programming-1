@@ -17,7 +17,7 @@ if __name__ == "__main__":
     cur = db.cursor()
     cur.execute("""SELECT cities.name FROM cities
     JOIN states ON state_id = states.id
-    WHERE states.name LIKE %s ORDER BY states.id""", (state_name,))
+    WHERE states.name LIKE %s ORDER BY cities.id""", (state_name,))
 
     rows = cur.fetchall()
     flattened_list = [element for tupl in rows for element in tupl]
