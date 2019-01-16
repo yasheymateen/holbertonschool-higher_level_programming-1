@@ -7,8 +7,6 @@ def find_peak(list_of_ints):
     """
     if list_of_ints is None or len(list_of_ints) == 0:
         return None
-    if len(set(list_of_ints)) == 1:
-        return list_of_ints[0]
     length = len(list_of_ints)
     mid = length // 2
     if length > 2:
