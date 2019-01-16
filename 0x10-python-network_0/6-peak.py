@@ -11,7 +11,7 @@ def find_peak(list_of_ints):
         return list_of_ints[0]
     length = len(list_of_ints)
     mid = length // 2
-    if mid != 0 or mid != length - 1:
+    if mid != 0 and length > 2:
         if list_of_ints[mid-1] < list_of_ints[mid] > list_of_ints[mid+1]:
             return list_of_ints[mid]
         else:
@@ -19,9 +19,8 @@ def find_peak(list_of_ints):
                 return find_peak(list_of_ints[:mid+1])
             else:
                 return find_peak(list_of_ints[mid:])
-    elif mid == 0:
-        if list_of_ints[mid] > list_of_ints[mid+1]:
-            return list_of_ints[mid]
-    elif mid == length - 1:
-        if list_of_ints[mid] > list_of_ints[mid-1]:
+    else:
+        if list_of_ints[mid-1] > list_of_ints[mid]:
+            return list_of_ints[mid-1]
+        else:
             return list_of_ints[mid]
