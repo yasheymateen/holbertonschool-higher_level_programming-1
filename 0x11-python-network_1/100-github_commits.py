@@ -21,7 +21,11 @@ if __name__ == '__main__':
     except:
         print("Not a valid JSON")
     result.sort(key=takeDate, reverse=True)
-    for i in range(10):
-        sha = result[i].get("sha")
-        name = result[i].get("commit").get("author").get("name")
-        print("{}: {}".format(sha, name))
+
+    try:
+        for i in range(10):
+            sha = result[i].get("sha")
+            name = result[i].get("commit").get("author").get("name")
+            print("{}: {}".format(sha, name))
+    except:
+        pass
