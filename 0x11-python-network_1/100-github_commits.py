@@ -5,6 +5,11 @@ repository “rails” by the user “rails”
 import requests
 import sys
 
+
+def takeDate(elem):
+    """Helper function to sort GitHub commit results by date"""
+    return elem.get("commit").get("author").get("date")
+
 if __name__ == '__main__':
     repo = sys.argv[1]
     owner = sys.argv[2]
@@ -12,7 +17,9 @@ if __name__ == '__main__':
 
     r = requests.get(url)
     result = r.json()
+    result.sort(key=takeDate, reverse=True)
     for i in range(10):
         sha = result[i].get("sha")
         name = result[i].get("commit").get("author").get("name")
+#        print(result[i].get("commit").get("author").get("date"))
         print("{}: {}".format(sha, name))
