@@ -16,10 +16,12 @@ if __name__ == '__main__':
     url = 'https://api.github.com/repos/{}/{}/commits'.format(owner, repo)
 
     r = requests.get(url)
-    result = r.json()
+    try:
+        result = r.json()
+    except:
+        print("Not a valid JSON")
     result.sort(key=takeDate, reverse=True)
     for i in range(10):
         sha = result[i].get("sha")
         name = result[i].get("commit").get("author").get("name")
-#        print(result[i].get("commit").get("author").get("date"))
-        print("{}: {}".format(sha, name))
+        print("{}: {} {}".format(sha, name))
