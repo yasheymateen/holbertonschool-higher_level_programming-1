@@ -8,9 +8,6 @@ request.get(process.argv[2], function (err, response, body) {
     let completedTasks = {};
     let json = JSON.parse(body);
     for (let i = 0; i < json.length; i++) {
-      if (!(json[i].userId in completedTasks)) {
-        completedTasks[json[i].userId] = 0;
-      }
       if (json[i].completed) {
         if (!(json[i].userId in completedTasks)) {
           completedTasks[json[i].userId] = 1;
