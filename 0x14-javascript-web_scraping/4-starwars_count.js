@@ -1,6 +1,9 @@
 #!/usr/bin/node
 const request = require('request');
 
+if (process.argv.length < 3) {
+  process.exit(1);
+}
 const character = 'https://swapi.co/api/people/18/';
 const options = {
   url: process.argv[2],
