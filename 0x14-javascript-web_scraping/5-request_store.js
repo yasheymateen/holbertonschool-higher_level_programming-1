@@ -11,12 +11,9 @@ request(options, function (err, response, data) {
     console.log(err);
   } else {
     const filePath = process.argv[3];
-    let ops = { encoding: 'utf8 ' };
-    fs.writeFile(filePath, data, ops, function (err, data) {
+    fs.writeFile(filePath, data, function (err, data) {
       if (err) {
         console.log(err);
-      } else {
-        console.log('written');
       }
     });
   }
