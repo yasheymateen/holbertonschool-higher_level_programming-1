@@ -1,10 +1,7 @@
 #!/usr/bin/node
 const request = require('request');
 
-const options = {
-  url: process.argv[2]
-};
-request.get(options, function (err, response, body) {
+request.get(process.argv[2], function (err, response, body) {
   if (err) {
     console.log(err);
   } else {
@@ -15,7 +12,11 @@ request.get(options, function (err, response, body) {
         completedTasks[json[i].userId] = 0;
       }
       if (json[i].completed) {
-        completedTasks[json[i].userId]++;
+        if (!(json[i].userId in completedTasks)) {
+          completedTasks[json[i].userId] = 1;
+        } else {
+          completedTasks[json[i].userId]++;
+        }
       }
     }
     console.log(completedTasks);
