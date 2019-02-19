@@ -3,7 +3,10 @@ const request = require('request');
 
 const options = {
   url: process.argv[2],
-  method: 'GET'
+  method: 'GET',
+  headers: {
+    'content-type': 'application/json'
+  }
 };
 request(options, function (err, response, data) {
   if (err) {
