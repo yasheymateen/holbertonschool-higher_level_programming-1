@@ -13,7 +13,7 @@ const options = {
 request(options, function (err, response, body) {
   if (err) {
     console.log(err);
-  } else if (response === 200) {
+  } else if (response.statusCode === 200) {
     let json = JSON.parse(body);
 
     const movies = json.results;
