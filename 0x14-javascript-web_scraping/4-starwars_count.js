@@ -1,7 +1,6 @@
 #!/usr/bin/node
 const request = require('request');
 
-const character = 'https://swapi.co/api/people/18/';
 const options = {
   url: process.argv[2],
   method: 'GET',
@@ -19,8 +18,12 @@ request(options, function (err, response, body) {
     const movies = json.results;
     let count = 0;
     for (let i = 0; i < movies.length; i++) {
-      if (movies[i].characters.includes(character)) {
-        count++;
+      let movie = movies[i];
+      for (let j = 0; j < movie.characters.length; j++) {
+        let character = movie.characters[j];
+        if (character.indexOf('18/') > -1) {
+          count++;
+        }
       }
     }
     console.log(count);
