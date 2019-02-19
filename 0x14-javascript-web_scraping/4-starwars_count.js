@@ -1,9 +1,6 @@
 #!/usr/bin/node
 const request = require('request');
 
-if (process.argv.length < 3) {
-  process.exit(1);
-}
 const character = 'https://swapi.co/api/people/18/';
 const options = {
   url: process.argv[2],
@@ -16,7 +13,7 @@ const options = {
 request(options, function (err, response, body) {
   if (err) {
     console.log(err);
-  } else {
+  } else if (response === 200) {
     let json = JSON.parse(body);
 
     const movies = json.results;
